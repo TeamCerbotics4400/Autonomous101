@@ -20,4 +20,6 @@ public final class Constants {
     public static final byte mRearRight = 3;
 
     public static final double mWheelDiameter = 0.1016;
+
+    public static final double kP = 1.5, kD = 0.2, kI = 0;
 }

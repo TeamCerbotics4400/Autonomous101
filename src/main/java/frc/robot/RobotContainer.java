@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.DriveForward;
 import frc.robot.commands.DriveForwardBangBang;
+import frc.robot.commands.DriveForwardPID;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.Drivetrain;
@@ -55,6 +56,8 @@ public class RobotContainer {
     .whenPressed(new DriveForwardBangBang(drivetrain, 1));
     new JoystickButton(joy0, 3)
     .whenPressed(new DriveForward(drivetrain, 1));
+    new JoystickButton(joy0, 4)
+    .whenPressed(new DriveForwardPID(drivetrain, 1));
   }
 
   /**
