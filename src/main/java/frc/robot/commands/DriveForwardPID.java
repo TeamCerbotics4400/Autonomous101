@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.Drivetrain;
 
 public class DriveForwardPID extends CommandBase {
@@ -17,7 +18,7 @@ public class DriveForwardPID extends CommandBase {
   public DriveForwardPID(Drivetrain drivetrainSubsystem, double distance) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.drivetrainSubsystem = drivetrainSubsystem;
-    pidController = new PIDController(Constants.kP, Constants.kI, Constants.kD);
+    pidController = new PIDController(DriveConstants.kP, DriveConstants.kI, DriveConstants.kD);
 
     pidController.setSetpoint(distance);
     addRequirements(drivetrainSubsystem);
