@@ -21,11 +21,17 @@ public class trajectoryS {
         var start = new Pose2d(1, 1, new Rotation2d(0));
         trajectoryWaypoints.add(start);
 
-        var Middle = new Pose2d(2.45, 2.5, new Rotation2d(Math.toRadians(10)));
-        trajectoryWaypoints.add(Middle);
+        var firstWayPoint = new Pose2d(2, 2, new Rotation2d(Math.toRadians(0)));
+        trajectoryWaypoints.add(firstWayPoint);
     
-        var firstTop = new Pose2d(2.53, 4.45, new Rotation2d(Math.toRadians(90)));
-        trajectoryWaypoints.add(firstTop);
+        var secondWayPoint = new Pose2d(3, 1, new Rotation2d(Math.toRadians(0)));
+        trajectoryWaypoints.add(secondWayPoint);
+
+        var thirdWayPoint = new Pose2d(4, 2, new Rotation2d(0));
+        trajectoryWaypoints.add(thirdWayPoint);
+
+        var fourthWayPoint = new Pose2d(1, 0, new Rotation2d(180));
+        trajectoryWaypoints.add(fourthWayPoint);
         
         TrajectoryConfig config = new TrajectoryConfig(AutoConstants.kMaxSpeedMetersPerSecond, AutoConstants.kMaxAccelerationMetersPerSecondSquared)
         .setKinematics(AutoConstants.kDriveKinematics);

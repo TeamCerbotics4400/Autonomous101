@@ -12,7 +12,7 @@ import frc.robot.commands.DriveForward;
 import frc.robot.commands.DriveForwardBangBang;
 import frc.robot.commands.DriveForwardPID;
 import frc.robot.commands.DriveForwardTimed;
-import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.PathAuto;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -28,9 +28,6 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain drivetrain = new Drivetrain();
   Joystick joy0 = new Joystick(0);
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -67,6 +64,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return new PathAuto(drivetrain);
   }
 }

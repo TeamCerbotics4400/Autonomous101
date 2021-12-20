@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.trajectories.trajectoryS;
@@ -13,15 +14,16 @@ import frc.robot.trajectories.trajectoryS;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PathAuto extends SequentialCommandGroup {
   /** Creates a new PathAuto. */
-  {
     /** Creates a new BarrelAuto. */
   
     public PathAuto(Drivetrain drive) {
   
       // Add your commands in the addCommands() call, e.g.
       // addCommands(new FooCommand(), new BarCommand());
-      addCommands(
+      var ResetOdometry = new InstantCommand(() -> drive.resetOdometry(trajectoryS.generatedTrajectoryOne().getInitialPose()));
+      addCommands(ResetOdometry, 
         drive.createCommandForTrajectory(trajectoryS.generatedTrajectoryOne(), true)
         .andThen(() -> drive.tankDriveVolts(0.0, 0.0))
       );
-}
+    }
+  }

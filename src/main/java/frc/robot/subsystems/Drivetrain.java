@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.ArrayList;
+
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
@@ -18,6 +20,7 @@ import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.util.Units;
@@ -53,6 +56,8 @@ public class Drivetrain extends SubsystemBase {
   PIDController leftPIDController = new PIDController(DriveConstants.kP, 0, 0);
   PIDController rightPIDController = new PIDController(DriveConstants.kP, 0, 0);
 
+  public static final Field2d field = new Field2d();
+
   public Drivetrain() {
 
     leftMaster.restoreFactoryDefaults();
@@ -79,6 +84,9 @@ public class Drivetrain extends SubsystemBase {
     leftEncoder.setPosition(0);
     rightEncoder.setPosition(0);
 
+    
+    SmartDashboard.putData(field);
+
     imu.reset();
   }
 
@@ -92,6 +100,8 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Odometry Angle:", mPosition.getRotation().getDegrees());
     SmartDashboard.putNumber("Left Velocity", getWheelSpeeds().leftMetersPerSecond);
     SmartDashboard.putNumber("Right Velocity", getWheelSpeeds().rightMetersPerSecond);
+
+    field.getObject("Robot").setPose(odometry.getPoseMeters());
   }
 
   public double getLeftEncoderValue(){
@@ -111,6 +121,15 @@ public class Drivetrain extends SubsystemBase {
     return -imu.getAngle();
   } 
 
+  public void plotTrajectory(Trajectory trajectory) {
+    ArrayList<Pose2d> poses = new ArrayList<>();
+
+    for (Trajectory.State pose : trajectory.getStates()) {
+      poses.add(pose.poseMeters);
+    }
+
+    field.getObject("foo").setPoses(poses);
+  }
   
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     return new DifferentialDriveWheelSpeeds(getEncoderVelocityMetersPerSecond(leftEncoder),
